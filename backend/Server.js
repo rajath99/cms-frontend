@@ -1,54 +1,57 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
+require("dotenv").config();
 
-dotenv.config();
+const express = require("express");
+const cors = require("cors");
+const cookieParser  = require("cookie-parser");
+const mongoose = require("mongoose");
+
+// ROUTERS
+const schoolRouter = require("./router/school.router")
+const studentRouter = require("./router/student.router")
+const classRouter = require("./router/class.router")
+const subjectRouter = require("./router/subject.router")
+const teacherRouter = require('./router/teacher.router')
+const examRouter =  require('./router/examination.router')
+const attendanceRoutes = require('./router/attendance.router');
+const periodRoutes = require("./router/period.router");
+const noticeRoutes = require("./router/notice.router");
+const authMiddleware = require("./auth/auth");
+const { authCheck } = require("./controller/auth.controller");
+const aiRouter = require("./router/ai.router.js");
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+// middleware 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
+const corsOptions = {exposedHeaders:"Authorization"}
+app.use(cors(corsOptions));
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+// MONGODB CONNECTION
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("MongoDB Atlas is Connected Successfully.");
+    })
+    .catch((e) => {
+        console.log("MongoDB Atlas Connection Error:", e);
+    });
+
+
+app.use("/api/school", schoolRouter)
+app.use("/api/student", studentRouter)
+app.use("/api/teacher", teacherRouter)
+app.use("/api/class", classRouter)
+app.use("/api/subject", subjectRouter)
+app.use('/api/examination', examRouter)
+app.use('/api/attendance', attendanceRoutes)
+app.use('/api/period',  periodRoutes)
+app.use('/api/notices', noticeRoutes)
+app.use('/api/ai', aiRouter);
+app.get('/api/auth/check',authCheck)
+
+
+
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, ()=>{
+    console.log("Server is running at port =>",PORT)
 })
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
-
-
-require('./models/school.model');     // Changed to match school.model.js
-require('./models/class.model');      // Assuming class.model.js
-require('./models/subject.model');    // Assuming subject.model.js
-require('./models/teacher.model');    // Assuming teacher.model.js
-require('./models/student.model');    // Assuming student.model.js
-require('./models/Assignment'); // Assuming assignment.model.js
-require('./models/Submission'); // Assuming submission.model.js
-
-
-
-
-
-
-
-
-// Routes
-app.get('/', (req, res) => {
-  res.send("Backend is running");
-  
-});
-
-// Assignment + submission routes
-const AssignmentsRoutes = require('./routes/assignments');
-const SubmissionsRoutes = require('./routes/submissions');
-
-// Mount Routes
- app.use('/api/assignments', AssignmentsRoutes);
- app.use('/api/submissions', SubmissionsRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
