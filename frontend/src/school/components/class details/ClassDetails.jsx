@@ -100,7 +100,7 @@ setMessage(message)
     const id = getClassId();
     if (id) {
       axios
-        .get(`${baseUrl}/api/class/fetch-single/${id}`)
+        .get(`${baseUrl}/class/fetch-single/${id}`)
         .then((resp) => {
           console.log("Single class", resp);
           setClassDetails(resp.data.data);
@@ -116,7 +116,7 @@ setMessage(message)
 
   const fetchAllClasses = () => {
     axios
-      .get(`${baseUrl}/api/class/fetch-all`, { params: {} })
+      .get(`${baseUrl}/class/fetch-all`, { params: {} })
       .then((resp) => {
         console.log("ALL classes", resp);
         setAllClasses(resp.data.data);
