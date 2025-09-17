@@ -44,8 +44,8 @@ import darkTheme from "./basic utility components/darkTheme";
 import lightTheme from "./basic utility components/lightTheme";
 import ThemeToggleButton from "./basic utility components/ThemeToggleButton";
 import { useContext, useEffect, useState } from "react";
-import AssignmentSubmissionPage from "./school/components/students/AssignmentSubmissionPage";
-import AssignTeacherPage from "./school/components/teachers/AssignTeacherPage";
+//import AssignmentSubmissionPage from "./school/components/students/AssignmentSubmissionPage";
+//import AssignTeacherPage from "./school/components/teachers/AssignTeacherPage";
 import { NoticeProvider } from "./context/NoticeContext";
 import { Toaster } from 'react-hot-toast';
 
