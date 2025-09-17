@@ -89,7 +89,6 @@ function App() {
               <Route path='periods' element={<ScheduleStudent/>} />
               <Route path="attendance" element={<AttendanceStudent />} />
               <Route path="notice" element={<NoticeStudent/>} />
-              <Route path="submit-assignment" element={<AssignmentSubmissionPage />} />
             </Route>
   
             <Route path="teacher"  element={<Teacher/>}>
@@ -100,7 +99,7 @@ function App() {
               {/* <Route path='sub-teach' element={<StudentSubjectTeacher/>} /> */}
               <Route path="attendance" element={<AttendanceTeacher />} />
               <Route path="notice" element={<NoticeTeacher/>} />
-              <Route path="assign-teacher" element={<AssignTeacherPage />} />
+             
             </Route>
    
             <Route path="/" element={<Client />}>
