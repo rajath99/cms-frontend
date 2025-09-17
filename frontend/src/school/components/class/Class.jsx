@@ -45,7 +45,7 @@ export default function Class() {
   const handleDelete = (id) => {
     if (confirm("Are you sure you want to delete?")) {
       axios
-        .delete(`${baseUrl}/api/class/delete/${id}`)
+        .delete(`${baseUrl}/class/delete/${id}`)
         .then((resp) => {
           setMessage(resp.data.message);
           setType("success");
@@ -61,7 +61,7 @@ export default function Class() {
     console.log("Handle  Edit is called", id);
     setEdit(true);
     axios
-      .get(`${baseUrl}/api/class/fetch-single/${id}`)
+      .get(`${baseUrl}/class/fetch-single/${id}`)
       .then((resp) => {
         Formik.setFieldValue("class_num", resp.data.data.class_num);
         Formik.setFieldValue("class_text", resp.data.data.class_text);
@@ -113,7 +113,7 @@ export default function Class() {
       } else {
       
           axios
-            .post(`${baseUrl}/api/class/create`,{...values})
+            .post(`${baseUrl}/class/create`,{...values})
             .then((resp) => {
               console.log("Response after submitting admin casting", resp);
               setMessage(resp.data.message);
@@ -147,7 +147,7 @@ export default function Class() {
 
   const fetchstudentsClass = () => {
     axios
-      .get(`${baseUrl}/api/class/fetch-all`)
+      .get(`${baseUrl}/class/fetch-all`)
       .then((resp) => {
         console.log("Fetching data in  Casting Calls  admin.", resp);
         setStudentClass(resp.data.data);
