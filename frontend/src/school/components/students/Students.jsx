@@ -121,7 +121,7 @@ export default function Students() {
         }
 
         axios
-          .patch(`${baseUrl}/student/update/${editId}`, fd)
+          .patch(`${baseUrl}/api/student/update/${editId}`, fd)
           .then((resp) => {
             setMessage(resp.data.message);
             setType("success");
@@ -160,7 +160,7 @@ export default function Students() {
 
   const fetchStudentClass = () => {
     axios
-      .get(`${baseUrl}/class/fetch-all`)
+      .get(`${baseUrl}/api/class/fetch-all`)
       .then((resp) => {
         setStudentClass(resp.data.data);
       })
@@ -169,7 +169,7 @@ export default function Students() {
 
   const fetchStudents = () => {
     axios
-      .get(`${baseUrl}/student/fetch-with-query`, { params })
+      .get(`${baseUrl}/api/student/fetch-with-query`, { params })
       .then((resp) => {
         setStudents(resp.data.data);
       })
