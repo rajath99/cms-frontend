@@ -54,7 +54,7 @@ const AIGeneratorPage = () => {
 
     try {
       // Make a POST request to your backend endpoint
-      const result = await axios.post('http://localhost:5001/api/ai/generate', {
+      const result = await axios.post('https://cms-api-sms.onrender.com/api/ai/generate', {
         prompt: prompt,
       });
 
