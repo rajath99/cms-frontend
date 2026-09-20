@@ -72,7 +72,7 @@ import TeacherCardAdmin from "../../utility components/teacher card/TeacherCard"
       console.log("Handle  Edit is called", id);
       setEdit(true);
       axios
-        .get(`${baseUrl}/api/teacher/fetch-single/${id}`)
+        .get(`${baseUrl}/teacher/fetch-single/${id}`)
         .then((resp) => {
           Formik.setFieldValue("email", resp.data.data.email);
           Formik.setFieldValue("name", resp.data.data.name);
@@ -160,7 +160,7 @@ import TeacherCardAdmin from "../../utility components/teacher card/TeacherCard"
             Object.keys(values).forEach((key) => fd.append(key, values[key]));
   
             axios
-              .post(`${baseUrl}/api/teacher/register`, fd)
+              .post(`${baseUrl}/teacher/register`, fd)
               .then((resp) => {
                 console.log("Response after submitting admin teacher", resp);
                 setMessage(resp.data.message);
@@ -199,7 +199,7 @@ import TeacherCardAdmin from "../../utility components/teacher card/TeacherCard"
   
     const fetchteachers = () => {
       axios
-        .get(`${baseUrl}/api/teacher/fetch-with-query`, { params: params })
+        .get(`${baseUrl}/teacher/fetch-with-query`, { params: params })
         .then((resp) => {
           console.log("Fetching data in  teacher Calls  admin.", resp);
           setteachers(resp.data.data);
