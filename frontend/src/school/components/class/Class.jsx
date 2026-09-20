@@ -96,7 +96,7 @@ export default function Class() {
       if (isEdit) {
         console.log("edit id", editId);
         axios
-          .patch(`${baseUrl}/api/class/update/${editId}`, {
+          .patch(`${baseUrl}/class/update/${editId}`, {
             ...values,
           })
           .then((resp) => {
@@ -113,7 +113,7 @@ export default function Class() {
       } else {
       
           axios
-            .post(`${baseUrl}class/create`,{...values})
+            .post(`${baseUrl}/class/create`,{...values})
             .then((resp) => {
               console.log("Response after submitting admin casting", resp);
               setMessage(resp.data.message);
