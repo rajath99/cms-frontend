@@ -42,40 +42,64 @@ export default function Login() {
     const Formik = useFormik({
         initialValues: initialValues,
         validationSchema: loginSchema,
-        onSubmit: (values) => {
-            console.log("Login Formik values", values)
-            let url;
-            let navUrl;
-            if(loginType=="school_owner"){
-             url = `${baseUrl}/api/school/login`;
-             navUrl='/school'
-            }else if(loginType=="teacher"){
-                url = `${baseUrl}/api/teacher/login`
-                navUrl='/teacher'
-            }else if(loginType=="student"){
-                url = `${baseUrl}/api/student/login`
-                navUrl='/student'
+       onSubmit: (values) => {
+    console.log("Login Formik values", values);
+
+    let url;
+    let navUrl;
+
+    if (loginType === "school_owner") {
+        url = `${baseUrl}/school/login`;
+        navUrl = "/school";
+    } else if (loginType === "teacher") {
+        url = `${baseUrl}/teacher/login`;
+        navUrl = "/teacher";
+    } else if (loginType === "student") {
+        url = `${baseUrl}/student/login`;
+        navUrl = "/student";
+    }
+
+    console.log("LOGIN baseUrl:", baseUrl);
+    console.log("LOGIN final URL:", url);
+
+    axios.post(url, values)
+        .then(resp => {
+            console.log("Login response:", resp.data);
+            console.log("Login headers:", resp.headers);
+
+            setMessage(resp.data.message);
+            setType("success");
+
+            if (resp.data.success) {
+
+                const token = resp.headers.authorization;
+
+                console.log("Authorization token received:", !!token);
+
+                localStorage.setItem("token", token);
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(resp.data.user)
+                );
+
+                login(resp.data.user);
+                navigate(navUrl);
             }
-                axios.post(url, {...values}).then(resp=>{    
-                    setMessage(resp.data.message)
-                    setType("success")
-                    let token = resp.headers.get("Authorization");
-                    if(resp.data.success){
-                        localStorage.setItem("token", token);
-                        localStorage.setItem("user", JSON.stringify(resp.data.user));
-                        navigate(navUrl)
-                      login(resp.data.user)
-                    }
-                    Formik.resetForm();
-                }).catch(e=>{
-                    setMessage(e.response.data.message);
-                    setType("error")
-                    console.log("Error in  register submit", e.response.data.message)
-                })
-            
-           
-        }
-    })
+
+            Formik.resetForm();
+        })
+        .catch(e => {
+            console.error("Error in login:", e);
+
+            const errorMessage =
+                e.response?.data?.message ||
+                e.message ||
+                "Login failed. Please try again.";
+
+            setMessage(errorMessage);
+            setType("error");
+        });
+}
 
     return (<Box component={'div'} sx={{width:"100%", height:"80vh", background:"url(https://cdn.pixabay.com/photo/2017/08/12/21/42/back2school-2635456_1280.png)", backgroundSize:"cover"}}>
 
