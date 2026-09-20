@@ -22,7 +22,7 @@ const ScheduleStudent = () => {
   const [selectedClass, setSelectedClass] = useState(null);
 
   const getStudentDetails = () => {
-    axios.get(`${baseUrl}/api/student/fetch-own`).then(resp=>{
+    axios.get(`${baseUrl}/student/fetch-own`).then(resp=>{
         // setStudent(resp.data.data)
         setSelectedClass({
           id: resp.data.data.student_class._id,
@@ -45,7 +45,7 @@ const ScheduleStudent = () => {
       if (!selectedClass) return;
       try {
         const response = await axios.get(
-          `${baseUrl}/api/period/class/${selectedClass.id}`
+          `${baseUrl}/period/class/${selectedClass.id}`
         );
         const periods = response.data.periods;
         const eventsData = periods.map((period) => ({
