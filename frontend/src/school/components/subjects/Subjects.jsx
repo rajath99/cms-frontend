@@ -48,7 +48,7 @@ import {
     const handleEdit = (id) => {
       console.log("Handle  Edit is called", id);
       setEdit(true);
-      axios.get(`${baseUrl}/api/subject/fetch-single/${id}`)
+      axios.get(`${baseUrl}/subject/fetch-single/${id}`)
         .then((resp) => {
           Formik.setFieldValue("subject_name", resp.data.data.subject_name);
           Formik.setFieldValue("subject_codename", resp.data.data.subject_codename);
@@ -83,7 +83,7 @@ import {
         if (isEdit) {
           console.log("edit id", editId);
           axios
-            .patch(`${baseUrl}/api/subject/update/${editId}`, {
+            .patch(`${baseUrl}/subject/update/${editId}`, {
               ...values,
             })
             .then((resp) => {
@@ -100,7 +100,7 @@ import {
         } else {
         
             axios
-              .post(`${baseUrl}/api/subject/create`,{...values})
+              .post(`${baseUrl}/subject/create`,{...values})
               .then((resp) => {
                 console.log("Response after submitting admin casting", resp);
                 setMessage(resp.data.message);
@@ -134,7 +134,7 @@ import {
   
     const fetchstudentssubject = () => {
       axios
-        .get(`${baseUrl}/api/subject/fetch-all`)
+        .get(`${baseUrl}/subject/fetch-all`)
         .then((resp) => {
           console.log("Fetching data in  Casting Calls  admin.", resp);
           setStudentSubject(resp.data.data);
