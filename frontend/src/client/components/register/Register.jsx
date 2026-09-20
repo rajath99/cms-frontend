@@ -46,33 +46,32 @@ const resetMessage  =()=>{
                 fd.append("password", values.password)
 
                 // --- START OF DEBUGGING CHANGES ---
-                const specificEndpoint = "/school/register"; // The specific part for this call
-                const finalApiUrl = `${baseUrl}${specificEndpoint}`;
+               const specificEndpoint = "/school/register";
+const finalApiUrl = `${baseUrl}${specificEndpoint}`;
 
-                console.log("REGISTER.JSX: 'baseUrl' received from environment.js:", baseUrl);
-                console.log("REGISTER.JSX: 'specificEndpoint' for this call:", specificEndpoint);
-                console.log("REGISTER.JSX: Attempting API call to final URL:", finalApiUrl);
+console.log("REGISTER.JSX: baseUrl:", baseUrl);
+console.log("REGISTER.JSX: final URL:", finalApiUrl);
 
+axios.post(finalApiUrl, fd)
+    .then(resp => {
+        console.log("Response register submit:", resp.data);
 
-               
-                axios.post(`https://school-management-backend-cu0q.onrender.com/api/school/register`,fd).then(resp=>{
-                    console.log("Response register submit")
-                    setMessage(resp.data.message);
-                    setType("success")
-                    setFile(null)
-                    Formik.resetForm()
-                }).catch(e=>{
-                    setMessage(e.response.data.message);
-                    setType("error")
-                    console.log("Error in  register submit", e.response.data.message)
-                })
-            }else{
-                setMessage("Please Provide An Image.");
-                setType("error")
-            }
-            
-        }
+        setMessage(resp.data.message);
+        setType("success");
+        setFile(null);
+        Formik.resetForm();
     })
+    .catch(e => {
+        console.error("Error in register submit:", e);
+
+        const errorMessage =
+            e.response?.data?.message ||
+            e.message ||
+            "Registration failed. Please try again.";
+
+        setMessage(errorMessage);
+        setType("error");
+    });
 
     return (<Box component={'div'} sx={{width:"100%", minHeight:"80vh", background:"url(https://cdn.pixabay.com/photo/2017/08/12/21/42/back2school-2635456_1280.png)", backgroundSize:"cover"}}>
 
