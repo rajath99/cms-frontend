@@ -139,7 +139,7 @@ export default function Students() {
           Object.keys(values).forEach((key) => fd.append(key, values[key]));
 
           axios
-            .post(`${baseUrl}/api/student/register`, fd)
+            .post(`${baseUrl}/student/register`, fd)
             .then((resp) => {
               setMessage(resp.data.message);
               setType("success");
