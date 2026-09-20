@@ -132,7 +132,7 @@ setMessage(message)
   const [allSubjects, setAllSubjects] = useState([]);
   const fetchAllSubjects = () => {
     axios
-      .get(`${baseUrl}/api/subject/fetch-all`, { params: {} })
+      .get(`${baseUrl}/subject/fetch-all`, { params: {} })
       .then((resp) => {
         console.log("ALL subjects", resp);
         setAllSubjects(resp.data.data);
@@ -146,7 +146,7 @@ setMessage(message)
     const [allTeachers, setAllTeachers] = useState([]);
     const fetchAllTeachers = () => {
       axios
-        .get(`${baseUrl}/api/teacher/fetch-with-query`, { params: {} })
+        .get(`${baseUrl}/teacher/fetch-with-query`, { params: {} })
         .then((resp) => {
           console.log("ALL subjects", resp);
           setAllTeachers(resp.data.data);
@@ -159,7 +159,7 @@ setMessage(message)
     const [examinations, setExaminations] = useState([]);
     const fetchExaminations = () => {
       axios
-        .get(`${baseUrl}/api/examination/fetch-class/${getClassId()}`)
+        .get(`${baseUrl}/examination/fetch-class/${getClassId()}`)
         .then((resp) => {
           console.log("ALL Examination", resp);
           setExaminations(resp.data.data);
@@ -174,7 +174,7 @@ setMessage(message)
     const [students,setStudents] = useState([])
     const fetchStudents = () => {
       axios
-        .get(`${baseUrl}/api/student/fetch-with-query`, { params: {student_class: getClassId()} })
+        .get(`${baseUrl}/student/fetch-with-query`, { params: {student_class: getClassId()} })
         .then((resp) => {
           console.log("Fetching students data.", resp);
           setStudents(resp.data.data);
