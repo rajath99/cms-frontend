@@ -62,12 +62,17 @@ export default function Login() {
             let navUrl = "";
 
             if (loginType === "school_owner") {
+
                 url = `${baseUrl}/school/login`;
                 navUrl = "/school";
+
             } else if (loginType === "teacher") {
+
                 url = `${baseUrl}/teacher/login`;
                 navUrl = "/teacher";
+
             } else if (loginType === "student") {
+
                 url = `${baseUrl}/student/login`;
                 navUrl = "/student";
             }
@@ -76,6 +81,7 @@ export default function Login() {
             console.log("LOGIN final URL:", url);
 
             if (!url) {
+
                 console.error("Login URL was not created.");
 
                 setMessage("Please select a valid user type.");
@@ -113,6 +119,7 @@ export default function Login() {
                     }
 
                     if (resp.data.user) {
+
                         localStorage.setItem(
                             "user",
                             JSON.stringify(resp.data.user)
@@ -188,9 +195,11 @@ export default function Login() {
                     }}
                     component="div"
                 >
+
                     <Typography variant="h2">
                         Log In
                     </Typography>
+
                 </Box>
 
                 <Paper
