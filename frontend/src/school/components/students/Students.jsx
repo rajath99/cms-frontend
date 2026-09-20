@@ -55,7 +55,7 @@ export default function Students() {
   const handleDelete = (id) => {
     if (confirm("Are you sure you want to delete?")) {
       axios
-        .delete(`${baseUrl}/api/student/delete/${id}`)
+        .delete(`${baseUrl}/student/delete/${id}`)
         .then((resp) => {
           setMessage(resp.data.message);
           setType("success");
@@ -70,7 +70,7 @@ export default function Students() {
   const handleEdit = (id) => {
     setEdit(true);
     axios
-      .get(`${baseUrl}/api/student/fetch-single/${id}`)
+      .get(`${baseUrl}/student/fetch-single/${id}`)
       .then((resp) => {
         const data = resp.data.data;
         Formik.setValues({
@@ -121,7 +121,7 @@ export default function Students() {
         }
 
         axios
-          .patch(`${baseUrl}/api/student/update/${editId}`, fd)
+          .patch(`${baseUrl}/student/update/${editId}`, fd)
           .then((resp) => {
             setMessage(resp.data.message);
             setType("success");
@@ -160,7 +160,7 @@ export default function Students() {
 
   const fetchStudentClass = () => {
     axios
-      .get(`${baseUrl}/api/class/fetch-all`)
+      .get(`${baseUrl}/class/fetch-all`)
       .then((resp) => {
         setStudentClass(resp.data.data);
       })
@@ -169,7 +169,7 @@ export default function Students() {
 
   const fetchStudents = () => {
     axios
-      .get(`${baseUrl}/api/student/fetch-with-query`, { params })
+      .get(`${baseUrl}/student/fetch-with-query`, { params })
       .then((resp) => {
         setStudents(resp.data.data);
       })
