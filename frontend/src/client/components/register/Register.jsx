@@ -72,6 +72,12 @@ axios.post(finalApiUrl, fd)
         setMessage(errorMessage);
         setType("error");
     });
+                 } else {
+                setMessage("Please Provide An Image.");
+                setType("error");
+            }
+        }
+    });
 
     return (<Box component={'div'} sx={{width:"100%", minHeight:"80vh", background:"url(https://cdn.pixabay.com/photo/2017/08/12/21/42/back2school-2635456_1280.png)", backgroundSize:"cover"}}>
 
