@@ -7,7 +7,7 @@ export default function StudentDetails(){
     const [student, setStudent] = useState(null)
 
     const getStudentDetails = ()=>{
-        axios.get(`${baseUrl}/api/students/fetch-own`).then(resp=>{
+        axios.get(`${baseUrl}/students/fetch-own`).then(resp=>{
             setStudent(resp.data.data)
     console.log("student",  resp)
         }).catch(e=>{
