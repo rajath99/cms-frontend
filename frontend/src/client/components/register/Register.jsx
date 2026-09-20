@@ -9,7 +9,7 @@ import './Register.css'
 
 export default function Register() {
     const [message, setMessage] =  useState("");
-    const [type, setType]= useState("succeess");
+    const [type, setType]= useState("success");
 
 const [file, setFile] =useState(null);
 const [imageUrl, setImageUrl] = useState(null)
