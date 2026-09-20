@@ -35,7 +35,7 @@ export default function SubjectTeacher({classId, allSubjects, allTeachers, asign
       const handleDelete = (subTeachId)=>{
         if(confirm("Are you sure you want to delete?")){
           axios
-          .delete(`${baseUrl}/api/class/sub-teach/delete/${classId}/${subTeachId}`)
+          .delete(`${baseUrl}/class/sub-teach/delete/${classId}/${subTeachId}`)
           .then((resp) => {
               handleMessage("success",resp.data.message);
           })
@@ -52,7 +52,7 @@ export default function SubjectTeacher({classId, allSubjects, allTeachers, asign
         onSubmit: (values) => {
             if(isEditSubjTeach){
                 axios
-                .post(`${baseUrl}/api/class/sub-teach/update/${classId}/${subTeachId}`, { ...values })
+                .post(`${baseUrl}/class/sub-teach/update/${classId}/${subTeachId}`, { ...values })
                 .then((resp) => {
                   handleMessage("success",resp.data.message);
                 })
@@ -63,7 +63,7 @@ export default function SubjectTeacher({classId, allSubjects, allTeachers, asign
             }else{
                 console.log("Class id",classId)
                 axios
-                .post(`${baseUrl}/api/class/sub-teach/new/${classId}`, { ...values })
+                .post(`${baseUrl}/class/sub-teach/new/${classId}`, { ...values })
                 .then((resp) => {
                   console.log("Response submit edit", resp);
                   handleMessage("success",resp.data.message);
